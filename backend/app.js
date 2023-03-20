@@ -10,7 +10,7 @@ app.use((req, res, next) => {
   });
 
 app.get('/api/sauces', (req, res, next) => {
-    const stuff = [
+    const sauce = [
       {
         _id: '123',
         name: 'Cholula Original Hot Sauce, 5 fl oz        ',
@@ -26,7 +26,7 @@ app.get('/api/sauces', (req, res, next) => {
         userId: 'user123',
             },
     ];
-    res.status(200).json(stuff);
+    res.status(200).json(sauce);
   });
 
 module.exports = app;
