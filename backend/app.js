@@ -1,15 +1,45 @@
+// connection address: mongodb+srv://jabnat:Piiquante_p6@cluster0.b5jcheo.mongodb.net/?retryWrites=true&w=majority
+
 const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const thingSchema = mongoose.Schema({
+  _id: { type: Number, required: true },
+  name: { type: String, required: true },
+  manufacturer: { type: String, required: true },
+  description: { type: String, required: true },
+  heat: { type: Number, required: true },
+  likes: { type: Number, required: true },
+  dislikes: { type: Number, required: true },
+  imageUrl: { type: String, required: true },
+  mainPepper: { type: String, required: true },
+  usersLiked: { type: String, required: true },
+  usersDisliked: { type: String, required: true },
+  userId: { type: String, required: true },
+});
+
+module.exports = mongoose.model('Thing', thingSchema);
 
 const app = express();
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-  });
+app.use(express.json());
 
-app.use('/api/sauces', (req, res, next) => {
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  next();
+});
+
+app.post('/api/sauces', (req, res, next) => {
+  console.log(req.body);
+  res.status(201).json({
+    message: 'Thing created successfully!'
+  });
+});
+
+app.get('/api/sauces', (req, res, next) => {
     const sauce = [
       {
         _id: '123',
@@ -28,5 +58,16 @@ app.use('/api/sauces', (req, res, next) => {
     ];
     res.status(200).json(sauce);
   });
+
+  mongoose.connect('jabnat:Piiquante_p6@cluster0.b5jcheo.mongodb.net/?retryWrites=true&w=majority')
+  .then(() => {
+    console.log('successfully connected to MongoDB atlas!')
+  })
+  .catch((error) => {
+    console.log('unable to connect to MongoDB Atlas');
+    console.error('error');
+  });
+
+
 
 module.exports = app;
