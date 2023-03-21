@@ -9,11 +9,11 @@ app.use((req, res, next) => {
     next();
   });
 
-app.get('/api/sauces', (req, res, next) => {
+app.use('/api/sauces', (req, res, next) => {
     const sauce = [
       {
         _id: '123',
-        name: 'Cholula Original Hot Sauce, 5 fl oz        ',
+        name: 'Cholula Original Hot Sauce, 5 fl oz',
         manufacturer: 'Cholula',
         description: 'This is where it all started. Cholula Original Hot Sauce is crafted from a generations-old family recipe that features arbol and piquin peppers and a blend of regional spices to deliver authentic Mexican flavor and heat. Taste the best life has to offer with Cholula Original Hot Sauce. With medium heat, the options are endless for this versatile sauce. Try on everything from eggs and rice & beans to beverages and even pizza! We love it on both traditional Mexican enchiladas and tamales as well as new favorites like burrito bowls and fish tacos. From our distinctive wooden cap to the original recipe hot sauce inside, every bottle of Cholula is a celebration of great food, flavor and our Mexican roots.        ',
         heat: 100,
