@@ -70,7 +70,7 @@ exports.get('/', (req, res, next) => {
       }
     ];
     res.status(200).json(sauce);
-  });
+});
 
 // id search sauce
 exports.get('/:_id', (req, res, next) => {
@@ -96,8 +96,7 @@ exports.post('/sauces', (req, res, next) => {
     res.status(201).json({
       message: 'Sauce created successfully!'
     });
-  });
-
+});
 
 // Find sauce
 exports.put('/:_id', (req, res, next) => {
@@ -131,9 +130,9 @@ exports.delete('/:_id', (req, res, next) => {
         });
       }
     );
-  });
+});
   
   // Likes
-  exports.post('/:_id/like', (req, res, next) => {
+exports.post('/:_id/like', (req, res, next) => {
   
-  });
+});

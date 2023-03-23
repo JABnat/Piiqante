@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Sauce = require('./models/sauce');
 const sauceRoutes = require('./routes/sauces');
+const userRoutes = require('./routes/user');
+
+const app = express();
 
 const sauceSchema = mongoose.Schema({
   _id: {type: String._id, required: true },
@@ -23,7 +26,7 @@ const sauceSchema = mongoose.Schema({
 
 module.exports = mongoose.model('Sauce', sauceSchema);
 
-const app = express();
+
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -32,8 +35,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.json());
-
+app.use(bodyParser.json());
+app.use('api/sauces', sauceRoutes);
+app.use('api/auth', userRoutes);
 
   // connection to MongoDB Atlas
   mongoose.connect('mongodb+srv://jabnat:Piiquante_p6@cluster0.b5jcheo.mongodb.net/?retryWrites=true&w=majority')
@@ -44,6 +48,5 @@ app.use(express.json());
     console.log('unable to connect to MongoDB Atlas');
     console.error(error);
   });
-
 
 module.exports = app;
