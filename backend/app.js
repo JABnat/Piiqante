@@ -7,6 +7,7 @@ const Sauce = require('./models/sauce');
 const sauceRoutes = require('./routes/sauces');
 
 const sauceSchema = mongoose.Schema({
+  _id: {type: String._id, required: true },
   userId: { type: String, required: true },
   name: { type: String, required: true },
   manufacturer: { type: String, required: true },
@@ -32,8 +33,6 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-
-
 
 
   // connection to MongoDB Atlas
