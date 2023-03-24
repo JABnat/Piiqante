@@ -5,7 +5,7 @@ const Sauce = require('../models/sauce');
 // login
 
 exports.createSauce = (req, res, next) => {
-  const thisauceng = new Sauce({
+  const sauce = new Sauce({
     _id: req.body._id,
     userId: req.body.userId,
     name: req.body.userId,
@@ -36,7 +36,7 @@ exports.createSauce = (req, res, next) => {
 };
 
 // get sauce information
-exports.get('/', (req, res, next) => {
+exports.getSauceInformation = (req, res, next) => {
     const sauce = [
         {
           _id: 'JLHDSHS',  
@@ -70,10 +70,10 @@ exports.get('/', (req, res, next) => {
       }
     ];
     res.status(200).json(sauce);
-});
+};
 
 // id search sauce
-exports.get('/:_id', (req, res, next) => {
+exports.getAllSaucesId = (req, res, next) => {
     Sauce.findOne({
       _id: req.params.id
     }).then(
@@ -87,19 +87,19 @@ exports.get('/:_id', (req, res, next) => {
         });
       }
     );
-});
+};
 
 // Create sauce
-exports.post('/sauces', (req, res, next) => {
+exports.createSauce = (req, res, next) => {
     console.log(req.body);
     //sauce: String, image: File
     res.status(201).json({
       message: 'Sauce created successfully!'
     });
-});
+};
 
 // Find sauce
-exports.put('/:_id', (req, res, next) => {
+exports.modifySauce = (req, res, next) => {
     Sauce.findOne({
       _id: req.params.id
     }).then(
@@ -113,10 +113,10 @@ exports.put('/:_id', (req, res, next) => {
         });
       }
     );
-});
+};
 
 // Delete
-exports.delete('/:_id', (req, res, next) => {
+exports.deleteSauce = (req, res, next) => {
     Sauce.deleteOne({_id: req.params.id}).then(
       () => {
         res.status(200).json({
@@ -130,9 +130,9 @@ exports.delete('/:_id', (req, res, next) => {
         });
       }
     );
-});
+};
   
   // Likes
-exports.post('/:_id/like', (req, res, next) => {
+exports.createSauceLikes = (req, res, next) => {
   
-});
+};

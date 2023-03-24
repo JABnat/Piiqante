@@ -1,7 +1,7 @@
 //mongoose unique validator to throw understandable error
 
 const mongoose = require('mongoose');
-//const uniquevalidator = require('mongoose-unique-validator');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = mongoose.Schema ({
 email: { type: String, required: true, unique: true }, 
