@@ -37,6 +37,7 @@ exports.createSauce = (req, res, next) => {
 
 // get sauce information
 exports.getSauceInformation = (req, res, next) => {
+  console.log("getSauceInformation")
     const sauce = [
         {
           _id: 'JLHDSHS',  

@@ -1,6 +1,7 @@
+//  ('./app') + moved line 37 from line 3
+
 const http = require('http');
-const app = require('./app.js');
-const server = http.createServer(app);
+const app = require('./app'); 
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -35,6 +36,7 @@ const errorHandler = error => {
       throw error;
   }
 };
+const server = http.createServer(app);
 
 server.on('error', errorHandler);
 server.on('listening', () => {
