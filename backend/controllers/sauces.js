@@ -6,7 +6,6 @@ const Sauce = require('../models/sauce');
 
 exports.createSauce = (req, res, next) => {
   const sauce = new Sauce({
-    _id: req.body._id,
     userId: req.body.userId,
     name: req.body.userId,
     manufacturer: req.body.userId,
@@ -50,13 +49,13 @@ exports.getSauceInformation = (req, res, next) => {
           dislikes: 1,
           imageUrl: 'https://i5.walmartimages.com/asr/f0ef9049-d769-46cf-933b-5ce087095968.ae7c30538f20855df0fbbf37d7da80d8.jpeg',
           mainPepper: 'Arbol & Piquin',
-          usersLiked: 'usersLiked'['me gusta'],
-          usersDisliked: 'usersDisliked'['no me gusta'],
-          userId: 'user001',
+          usersLiked: "",
+          usersDisliked: "",
         },
   
       { 
         _id: 'ERTGJHS',
+        userId: 'user123',
         name: 'Tapatio, Hot Sauce, 32 oz',
         manufacturer: 'Tapatio',
         description: 'Add some zest and bold flavor to a meal with the Tapatio Hot Sauce 32 oz bottle. This salsa picante is ideal for tacos, mixed drinks, dip and much more. Add according to taste, pouring on the heavier side to add a bolder kick and a more authentic Mexican flavor to your dishes. This fat-free sauce is used in restaurants around the country and can now be enjoyed in the comfort of your own home. A simple ingredients list helps you easily see what exactly makes Tapatio sauce so good.',
@@ -65,9 +64,8 @@ exports.getSauceInformation = (req, res, next) => {
         dislikes: 10,
         imageUrl: 'https://i5.walmartimages.com/asr/2466f4bc-14a1-4718-8a3d-56db74cd7505.1a3c7439fdd2b5aa2018f7b6281a543e.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF',
         mainPepper: 'Cayanne Pepper',
-        usersLiked: 'usersLiked'['me gusta'],
-        usersDisliked: 'usersDisliked'['no me gusta'],
-        userId: 'user123',
+        usersLiked: "",
+        usersDisliked: "",
       }
     ];
     res.status(200).json(sauce);

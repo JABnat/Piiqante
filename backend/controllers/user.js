@@ -31,20 +31,23 @@ exports.signup = (req, res, next) => {
       (user) => {
         if (!user) {
           return res.status(401).json({
-            error: new Error('User not found!')
+            error: new Error('Verify username/password!')
           });
         }
         bcrypt.compare(req.body.password, user.password).then(
           (valid) => {
             if (!valid) {
               return res.status(401).json({
-                error: new Error('Incorrect password!')
+                error: new Error('Verify username/password!')
               });
             }
+
             const token = jwt.sign(
               { userId: user._id },
-              'RANDOM_TOKEN_SECRET',
-              { expiresIn: '24h' });
+              'RJNi6Q49icpFeTpMjVCpqUJ8a6vvrzAd',
+              { expiresIn: '24h' }
+            );
+
             res.status(200).json({
               userId: user._id,
               token: token

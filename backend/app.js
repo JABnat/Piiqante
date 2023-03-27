@@ -5,10 +5,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-// const path = require('path'); // ***** new *****
+const path = require('path'); // ***** new *****
 
 const sauceRoutes = require('./routes/sauces');
-// const userRoutes = require('./routes/user'); // ***** new (commented out)*****
+const userRoutes = require('./routes/user'); 
 
 // connection to MongoDB Atlas
 mongoose.connect('mongodb+srv://jabnat:Piiquante_p6@cluster0.b5jcheo.mongodb.net/?retryWrites=true&w=majority',
@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 app.use('/api/sauces', sauceRoutes); //***** new (added '/' before 'api')*****
-// app.use('/api/auth', userRoutes); ***** new (commented out)*****
+app.use('/api/auth', userRoutes); 
 
 
 module.exports = app;
