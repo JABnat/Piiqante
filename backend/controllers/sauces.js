@@ -43,11 +43,10 @@ exports.createSauce = (req, res, next) => {
   );
 };
 
-
 // id search sauce
 exports.getAllSaucesId = (req, res, next) => {
     Sauce.findOne({
-      _id: req.params.id
+      _id: req.params._id
     }).then(
       (sauce) => {
         res.status(200).json(sauce);
@@ -61,7 +60,24 @@ exports.getAllSaucesId = (req, res, next) => {
     );
 };
 
-// Find sauce
+// Delete
+exports.deleteSauce = (req, res, next) => {
+  Sauce.deleteOne({_id: req.params._id})
+  .then(() => {
+      res.status(200).json({
+        message: 'Deleted!'
+      });
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+};
+
+// Modify sauce
 exports.modifySauce = (req, res, next) => {
     Sauce.findOne({
       _id: req.params.id
@@ -78,22 +94,7 @@ exports.modifySauce = (req, res, next) => {
     );
 };
 
-// Delete
-exports.deleteSauce = (req, res, next) => {
-    Sauce.deleteOne({_id: req.params.id}).then(
-      () => {
-        res.status(200).json({
-          message: 'Deleted!'
-        });
-      }
-    ).catch(
-      (error) => {
-        res.status(400).json({
-          error: error
-        });
-      }
-    );
-};
+
   
   // Likes
 exports.createSauceLikes = (req, res, next) => {
