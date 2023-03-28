@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
         callback(null, 'images')
     },
     filename: (req, file, callback) => {
-        const name = file.origionalname.split(' ').join('_');
+        const name = file.originalname.split(' ').join('_');
         const extension = MIME_TYPES[file.mimetype];
         const filename = name + Date.now() + '.' + extension;
         callback(null, filename);
@@ -19,3 +19,7 @@ const storage = multer.diskStorage({
 });
 
 module.exports = multer({storage}).single('image');
+
+
+// register images in the images folder
+// connect sauce var to registered images

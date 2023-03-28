@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const multer= require('../middleware/multer-config');
 
 const auth = require('../middleware/auth');
 
 const saucesCtrl = require('../controllers/sauces');
 
-router.get('/', auth , saucesCtrl.getSauceInformation);
-router.get('/:_id', auth, saucesCtrl.getAllSaucesId);
-router.post('/', auth, saucesCtrl.createSauce);
-router.put('/:_id', auth, saucesCtrl.modifySauce);
-router.delete('/:_id', auth, saucesCtrl.deleteSauce);
-router.post('/', auth, saucesCtrl.createSauceLikes);
-
+router.get('/', auth , saucesCtrl.getSauceInformation); // done
+router.get('/:_id', auth, saucesCtrl.getAllSaucesId); // (** frontend not displaying individual sauce **)
+router.post('/', auth, multer, saucesCtrl.createSauce); //done 
+router.put('/:_id', auth, multer, saucesCtrl.modifySauce); //done 
+router.delete('/:_id', auth, saucesCtrl.deleteSauce); //done 
+// router.post('/', auth, saucesCtrl.createSauceLikes); // ( in progress )
 
 module.exports = router;
+
+// needed to call multer in router to save images during create and modify process (11-12) -multer = registering images

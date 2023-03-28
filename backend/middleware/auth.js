@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
     if (req.body.userId && req.body.userId !== userId) {
       throw 'Verify user ID';
     } else {
-      req.auth = {
+      req.auth = {    // question for David 
         userId: userId
       };
       next();
