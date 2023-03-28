@@ -79,9 +79,20 @@ exports.deleteSauce = (req, res, next) => {
 
 // Modify sauce
 exports.modifySauce = (req, res, next) => {
-    Sauce.findOne({
-      _id: req.params.id
-    }).then(
+    Sauce.findOneAndUpdate({
+      _id: req.params.id,
+      userId: req.auth.userId,
+      name: req.body.name,
+      manufacturer: req.body.manufacturer,
+      description: req.body.description,
+      heat: req.body.heat,
+      likes: req.body.likes,
+      dislikes: req.body.dislikes,
+      imageUrl: req.body.imageUrl,
+      mainPepper: req.body.mainPepper,
+      usersLiked: req.body.usersLiked,
+      usersDisliked: req.body.usersDisliked,
+      }).then(
       (sauce) => {
         res.status(200).json(sauce);
       }
