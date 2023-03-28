@@ -66,6 +66,22 @@ exports.getAllSaucesId = (req, res, next) => {
 
 // delete sauce
 exports.deleteSauce = (req, res, next) => {
+  
+  // auth for delete
+const userId = req.auth.userId;
+Sauce.findOne({
+  _id: req.params._id
+})
+.then (
+(sauce) => {
+  if ( userId !== sauce.userId) {
+    res.status(401).json({
+      message: 'ah ah ah... you do not seem to be the author of this post'
+    })
+  }}
+)
+
+//delete function
   Sauce.deleteOne({_id: req.params._id})
   .then(() => {
       res.status(200).json({
@@ -81,8 +97,25 @@ exports.deleteSauce = (req, res, next) => {
   );
 };
 
+
 // Modify sauce
 exports.modifySauce = (req, res, next) => {
+  
+  // auth for modify
+  const userId = req.auth.userId;
+  Sauce.findOne({
+    _id: req.params._id
+  })
+  .then (
+  (sauce) => {
+    if ( userId !== sauce.userId) {
+      res.status(401).json({
+        message: 'ah ah ah... you do not seem to be the author of this post'
+      })
+    }}
+  )
+
+// Modify function
   if (req.body.sauce) {
     let sauceFromFront = JSON.parse(req.body.sauce);
     Sauce.findOneAndUpdate({
@@ -138,13 +171,7 @@ exports.modifySauce = (req, res, next) => {
     }
 };
   
-  // (Likes)
-  // User selects like button on sauce page
-  // logic in controllers is activated adding one to total quantity
-  // Sauce is updated with new value
-  // updatedSauce is sent to and saved in MongoDB
-  // updatedSauce is returned to client
-
+// Like or Dislike sauce
   exports.sauceLikes = (req, res, next) => {  
     const user = req.body.userId;
     let likes = req.body.like;
