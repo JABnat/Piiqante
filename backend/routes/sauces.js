@@ -11,7 +11,7 @@ router.get('/:_id', auth, saucesCtrl.getAllSaucesId); // (** frontend not displa
 router.post('/', auth, multer, saucesCtrl.createSauce); //done 
 router.put('/:_id', auth, multer, saucesCtrl.modifySauce); //done 
 router.delete('/:_id', auth, saucesCtrl.deleteSauce); //done 
-// router.post('/', auth, saucesCtrl.createSauceLikes); // ( in progress )
+router.post('/:_id/like', auth, saucesCtrl.sauceLikes); // ( in progress )
 
 module.exports = router;
 

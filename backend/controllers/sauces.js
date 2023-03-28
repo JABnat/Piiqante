@@ -147,25 +147,22 @@ exports.modifySauce = (req, res, next) => {
 
   exports.sauceLikes = (req, res, next) => {  
     const user = req.body.userId;
-    let likes = req.body.likes;
-    sauce.findOne({ _id: req.params._id })
+    let likes = req.body.like;
+    console.log(likes);
+    Sauce.findOne({ _id: req.params._id })
       .then((votedSauce) => {  
         if (likes === 1) {
-          sauce.updateOne({ _id:req.params._id }, { $push: { usersLiked: user }, $inc: { likes:1 }})
+          Sauce.updateOne({ _id:req.params._id }, { $push: { usersLiked: user }, $inc: { likes:1 }})
             .then(() => 
-            res.status(201).json({ message: 'you liked this sauce' })
+            res.status(201).json({ message: 'You liked this sauce' })
             )
             .catch(
               error => res.status(400).json({ error })
               )
         } else if (likes === -1) {
-            sauce.updateOne(
-              { 
-                _id: req.params._id }, { $inc: { dislikes: 1 }, $push: { usersDisliked: user }
-              }
-            )
+            Sauce.updateOne({ _id: req.params._id }, { $push: { usersDisliked: user }, $inc: { dislikes: 1 }})
             .then(() => 
-              res.status(201).json({ message: 'you disliked this sauce' })
+              res.status(201).json({ message: 'You disliked this sauce' })
               )
             .catch(
               error => res.status(400).json({ error })
@@ -173,21 +170,17 @@ exports.modifySauce = (req, res, next) => {
         } else if (likes === 0) {
             if (votedSauce.usersLiked.includes(user)) 
                 {
-                  sauce.update({ _id: req.params._id }, { $inc: { likes:  -1 }, $pull: { usersLiked: user }
-                }
-              )
+                  Sauce.updateOne({ _id: req.params._id }, { $pull: { usersLiked: user }, $inc: { likes:  -1 } })
                   .then(() => 
                   res.status(201).json(
-                    { message:'you un-liked this sauce' }
+                    { message:'You un-liked this sauce' }
                     )
                   )
                   .catch(error => res.status(400).json({ error })
                   )
               } else if (votedSauce.usersDisliked.includes(user)) 
                   {
-                    sauce.updateOne({ _id: req.params._id }, { $inc: { dislikes: -1 }, $pull: { usersDisliked: user }
-                  }
-                )
+                    Sauce.updateOne({ _id: req.params._id }, { $pull: { usersDisliked: user }, $inc: { dislikes: -1 }})
                   .then(() => 
                   res.status(201).json({ message:'you un-disliked this sauce' })
                   )
@@ -199,3 +192,4 @@ exports.modifySauce = (req, res, next) => {
       })
       .catch(error => res.status(400).json({ error }))
   };
+  
