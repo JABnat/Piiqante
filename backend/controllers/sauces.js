@@ -114,11 +114,11 @@ exports.modifySauce = (req, res, next) => {
       })
     }}
   )
-
 // Modify function
   if (req.body.sauce) {
     let sauceFromFront = JSON.parse(req.body.sauce);
-    Sauce.findOneAndUpdate({
+    const filter = {_id: req.params._id};
+    const updateData = {
       _id: req.params.id,
       userId: req.auth.userId,
       name: sauceFromFront.name,
@@ -131,7 +131,9 @@ exports.modifySauce = (req, res, next) => {
       mainPepper: sauceFromFront.mainPepper,
       usersLiked: [],
       usersDisliked: [],
-        }).then(
+    };
+
+    Sauce.findOneAndUpdate(filter, updateData).then(
           (sauce) => {
             res.status(200).json(sauce);
           }
@@ -144,7 +146,8 @@ exports.modifySauce = (req, res, next) => {
     );
     }
     else {
-      Sauce.findOneAndUpdate({
+      const filter = {_id: req.params._id};
+      const updatedDataWithoutPhoto = { 
         _id: req.params.id,
         userId: req.auth.userId,
         name: req.body.name,
@@ -157,7 +160,8 @@ exports.modifySauce = (req, res, next) => {
         mainPepper: req.body.mainPepper,
         usersLiked: [],
         usersDisliked: [],
-          }).then(
+      };
+      Sauce.findOneAndUpdate(filter, updatedDataWithoutPhoto).then(
             (sauce) => {
               res.status(200).json(sauce);
             }

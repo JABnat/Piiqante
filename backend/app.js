@@ -36,6 +36,4 @@ app.use('/api/sauces', sauceRoutes); //***** new (added '/' before 'api')*****
 app.use('/api/auth', userRoutes); 
 
 
-
-
 module.exports = app;
