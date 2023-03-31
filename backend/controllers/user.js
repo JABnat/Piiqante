@@ -44,7 +44,7 @@ const jwt = require('jsonwebtoken');
 
             const token = jwt.sign(
               { userId: user._id },
-              'RJNi6Q49icpFeTpMjVCpqUJ8a6vvrzAd',
+              'RJNi6Q49icpFeTpMjVCpqUJ8a6vvrzAd', //secret encryption key
               { expiresIn: '24h' }
             );
 
