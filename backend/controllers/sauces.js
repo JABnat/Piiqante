@@ -117,6 +117,7 @@ exports.modifySauce = (req, res, next) => {
   )
 // Modify function
   if (req.body.sauce) {
+
     let sauceFromFront = JSON.parse(req.body.sauce);
     const filter = {_id: req.params._id};
     const updateData = {
@@ -134,7 +135,7 @@ exports.modifySauce = (req, res, next) => {
       usersDisliked: [],
     };
 
-    Sauce.findOneAndUpdate(filter, updateData).then(
+    Sauce.findOneAndUpdate(filter, updateData, {new: true}).then(
           (sauce) => {
             res.status(200).json(sauce);
           }
