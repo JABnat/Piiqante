@@ -7,12 +7,10 @@ const auth = require('../middleware/auth');
 const saucesCtrl = require('../controllers/sauces');
 
 router.get('/', auth , saucesCtrl.getSauceInformation); // done
-router.get('/:_id', auth, saucesCtrl.getAllSaucesId); // (** frontend not displaying individual sauce **)
+router.get('/:_id', auth, saucesCtrl.getAllSaucesId); // done
 router.post('/', auth, multer, saucesCtrl.createSauce); //done 
 router.put('/:_id', auth, multer, saucesCtrl.modifySauce); //done 
 router.delete('/:_id', auth, saucesCtrl.deleteSauce); //done 
-router.post('/:_id/like', auth, saucesCtrl.sauceLikes); // ( in progress )
+router.post('/:_id/like', auth, saucesCtrl.sauceLikes); // done
 
 module.exports = router;
-
-// needed to call multer in router to save images during create and modify process (11-12) -multer = registering images

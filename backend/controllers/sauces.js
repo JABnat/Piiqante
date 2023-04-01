@@ -108,6 +108,7 @@ exports.modifySauce = (req, res, next) => {
   })
   .then (
   (sauce) => {
+    const userId = req.auth.userId;
     if ( userId !== sauce.userId) {
       res.status(401).json({
         message: 'ah ah ah... you do not seem to be the author of this post'
@@ -179,7 +180,7 @@ exports.modifySauce = (req, res, next) => {
   exports.sauceLikes = (req, res, next) => {  
     const user = req.body.userId;
     let likes = req.body.like;
-    console.log(likes);
+    
     Sauce.findOne({ _id: req.params._id })
       .then((votedSauce) => {  
         if (likes === 1) {

@@ -20,7 +20,3 @@ const storage = multer.diskStorage({
 });
 
 module.exports = multer({storage}).single('image');
-
-
-// register images in the images folder
-// connect sauce var to registered images
