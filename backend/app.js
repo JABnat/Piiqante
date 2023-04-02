@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config() //library to read environement variable from .env file
 
 const path = require('path');
 
@@ -9,7 +10,7 @@ const sauceRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user'); 
 
 // connection to MongoDB Atlas
-mongoose.connect('mongodb+srv://jabnat:Piiquante_p6@cluster0.b5jcheo.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env['CONNECTION_INFO'],
 { useNewUrlParser: true,
   useUnifiedTopology: true }) 
 .then(() => {
@@ -31,6 +32,5 @@ app.use(bodyParser.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes); 
-
 
 module.exports = app;
