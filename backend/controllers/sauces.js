@@ -1,4 +1,5 @@
 const Sauce = require('../models/sauce');
+const fs = require('fs'); 
 
 // get sauce information
 exports.getSauceInformation = (req, res, next) => {
@@ -66,36 +67,49 @@ exports.getAllSaucesId = (req, res, next) => {
 
 // delete sauce
 exports.deleteSauce = (req, res, next) => {
-  
-  // auth for delete
-const userId = req.auth.userId;
-Sauce.findOne({
-  _id: req.params._id
-})
-.then (
-(sauce) => {
-  if ( userId !== sauce.userId) {
-    res.status(401).json({
-      message: 'ah ah ah... you do not seem to be the author of this post'
-    })
-  }}
-)
 
-//delete function
-  Sauce.deleteOne({_id: req.params._id})
-  .then(() => {
-      res.status(200).json({
-        message: 'Deleted!'
-      });
+  const userId = req.auth.userId;
+  Sauce.findOne({
+    _id: req.params._id
+  })
+  .then (
+    (sauce) => {
+      // auth for delete
+      if ( userId !== sauce.userId) {
+        res.status(401).json({
+          message: 'ah ah ah... you do not seem to be the author of this post'
+        })
+      }
+
+// delete image from storage
+      const deletedSauceImage = sauce.imageUrl.split('/')[4];
+      try {
+        fs.unlinkSync('./images/' + deletedSauceImage); //to finish unlinking action before continuing
+      
+        console.log("Delete File successfully.");
+      } catch (error) {
+        console.log(error);
+      }
     }
-  ).catch(
-    (error) => {
-      res.status(400).json({
-        error: error
-      });
-    }
-  );
-};
+  )
+  // delete function
+    Sauce.deleteOne({_id: req.params._id})
+    .then(() => {
+        res.status(200).json({
+          message: 'Deleted!'
+        });
+      }
+    ).catch(
+      (error) => {
+        res.status(400).json({
+          error: error
+        });
+      }
+    );
+  };
+
+//delete image from storage
+
 
 // Modify sauce
 exports.modifySauce = (req, res, next) => {
